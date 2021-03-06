@@ -1,0 +1,19 @@
+{
+  "reminders": [
+    {
+      "name": "laaman parturointi",
+      "timestamp": "26.2.2021 klo 19.41.35",
+      "id": 14
+    },
+    {
+      "name": "pese kissa",
+      "timestamp": "26.2.2021 klo 19.43.34",
+      "id": 15
+    },
+    {
+      "name": "keri karitsa",
+      "timestamp": "26.2.2021 klo 19.43.34",
+      "id": 16
+    }
+  ]
+}
