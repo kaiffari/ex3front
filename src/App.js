@@ -20,7 +20,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get('https://thawing-bayou-48463.herokuapp.com/api/reminders')  /* http://localhost:3001 */
+      .get('/api/reminders')  /* http://localhost:3001 https://thawing-bayou-48463.herokuapp.com */
       .then(response => {
         console.log('get promise fulfilled')
         this.setState({ reminders: response.data })

@@ -35,7 +35,7 @@ class AddReminders extends React.Component {
 
       /* write to json file */
       axios
-        .post('https://thawing-bayou-48463.herokuapp.com/api/reminders', reminderObject)
+        .post('/api/reminders', reminderObject) /* https://thawing-bayou-48463.herokuapp.com */
         .then(response => {
           console.log('post promise fulfilled for id: ', maxid)
         })
