@@ -7,12 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      reminders: [
-        /*{
-          name: 'Buy some eggs',
-          timestamp: "2018-11-10T13:00:00.141Z"
-        }*/
-      ]
+      reminders: [],
+      password: ''
     }
     this.setReminder = this.setReminder.bind(this);
     this.deleteReminder = this.deleteReminder.bind(this);
@@ -20,9 +16,10 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get('/api/reminders')  /* http://localhost:3001 https://thawing-bayou-48463.herokuapp.com */
+      .get('/api/reminders')      //http://localhost:3001 paikallinen serveri, https://thawing-bayou-48463.herokuapp.com  heroku ilman api tasoa
       .then(response => {
         console.log('get promise fulfilled')
+        console.log('response data: ', response.data)
         this.setState({ reminders: response.data })
       })
   }

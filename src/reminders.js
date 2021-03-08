@@ -20,6 +20,7 @@ class ShowReminders extends React.Component {
   }
 
   render () {
+    console.log('render')
     if (this.props.reminders.length > 0) {
     return (
         <div>  

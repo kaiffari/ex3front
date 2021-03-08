@@ -20,6 +20,7 @@ class AddReminders extends React.Component {
     if (pos == -1) {
 
       /* construct new object */
+      /* HUOM tällä maxid:llä ei ole väliä Heroku käytössä, koska siellä arvotaan uusi id */
       var maxid = 0
       this.props.reminders.map(o => {if (o.id > maxid) maxid = o.id})
       maxid = maxid + 1
