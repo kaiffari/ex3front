@@ -14,10 +14,9 @@ class App extends React.Component {
     this.deleteReminder = this.deleteReminder.bind(this);
   }
 
-        /* http://localhost:3001 paikallinen serveri, https://thawing-bayou-48463.herokuapp.com  heroku ilman api tasoa */
   componentDidMount() {
     axios
-      .get('https://thawing-bayou-48463.herokuapp.com/api/reminders')
+      .get('/api/reminders')
       .then(response => {
         console.log('get promise fulfilled')
         console.log('response data: ', response.data)
@@ -40,7 +39,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Add Reminder</h2>
+        <h2>Lisää muistutus</h2>
         <AddReminders
           reminders={this.state.reminders} 
           setReminder={this.setReminder}/>

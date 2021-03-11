@@ -17,7 +17,7 @@ class ShowReminders extends React.Component {
     if (window.confirm('Haluatko todella poistaa?')) {
         /* delete from database */
         axios
-        .delete('https://thawing-bayou-48463.herokuapp.com/api/reminders/' + e.target.id) /*https://thawing-bayou-48463.herokuapp.com*/
+        .delete('/api/reminders/' + e.target.id)
         .then(response => {
           /* clear also parent state and update rendering after succesful database deletion */
           this.props.deleteReminder(e.target.id);
@@ -42,7 +42,7 @@ class ShowReminders extends React.Component {
     console.log('new: ', updatedReminder)
     /* write to database */
     axios
-    .put('https://thawing-bayou-48463.herokuapp.com/api/reminders/' + e.target.id, updatedReminder)
+    .put('/api/reminders/' + e.target.id, updatedReminder)
     .then(response => {
       /* set also parent state and update rendering after succesful database deletion */
       const newReminders = this.props.reminders.map(r => (r.id === e.target.id ? updatedReminder : r))
@@ -70,7 +70,7 @@ class ShowReminders extends React.Component {
     if (this.props.reminders.length > 0) {
     return (
         <div>  
-          <h2>Reminders</h2>
+          <h2>Muistutukset</h2>
           <button onClick={this.toggleVisible}>
             näytä {label}
           </button>

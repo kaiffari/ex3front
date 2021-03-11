@@ -29,7 +29,7 @@ class AddReminders extends React.Component {
 
       /* write to database */
       axios
-        .post('https://thawing-bayou-48463.herokuapp.com/api/reminders', reminderObject) /* https://thawing-bayou-48463.herokuapp.com voi jättää pois, tarvitaan paikallisen testaamiseen*/
+        .post('/api/reminders', reminderObject)
         .then(response => {
           /* concatenate new list and set to App state */
           reminderObject.id = response.data /* post returns only new database id */
