@@ -14,9 +14,10 @@ class App extends React.Component {
     this.deleteReminder = this.deleteReminder.bind(this);
   }
 
+        /* http://localhost:3001 paikallinen serveri, https://thawing-bayou-48463.herokuapp.com  heroku ilman api tasoa */
   componentDidMount() {
     axios
-      .get('/api/reminders')      //http://localhost:3001 paikallinen serveri, https://thawing-bayou-48463.herokuapp.com  heroku ilman api tasoa
+      .get('https://thawing-bayou-48463.herokuapp.com/api/reminders')
       .then(response => {
         console.log('get promise fulfilled')
         console.log('response data: ', response.data)
@@ -31,7 +32,7 @@ class App extends React.Component {
   }
 
   deleteReminder(id) {
-    /*console.log('deleteReminder...', {id})*/
+    console.log('deleteReminder from status...', {id})
     const remainReminders = this.state.reminders.filter(i => i.id != id)
     this.setState({reminders: remainReminders})
   }
@@ -45,7 +46,8 @@ class App extends React.Component {
           setReminder={this.setReminder}/>
         <ShowReminders
           reminders={this.state.reminders}
-          deleteReminder={this.deleteReminder}/>
+          deleteReminder={this.deleteReminder}
+          setReminder={this.setReminder}/>
       </div>
     
     )

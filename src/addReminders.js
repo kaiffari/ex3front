@@ -6,7 +6,7 @@ class AddReminders extends React.Component {
       super(props);
       this.state = {
         newReminder: '',
-        newTime: new Date().toLocaleString()
+        newTime: new Date()  //.toLocaleString()
       }
     }
 
@@ -20,29 +20,30 @@ class AddReminders extends React.Component {
     if (pos == -1) {
 
       /* construct new object */
-      /* HUOM tällä maxid:llä ei ole väliä Heroku käytössä, koska siellä arvotaan uusi id */
-      var maxid = 0
-      this.props.reminders.map(o => {if (o.id > maxid) maxid = o.id})
-      maxid = maxid + 1
+      var time  = this.state.newTime.toISOString()
       const reminderObject = {
         name: this.state.newReminder,
-        timestamp: this.state.newTime,
-        id: maxid
+        timestamp: time,
+        important: Math.random() > 0.7
       }
-    
-      /* concatenate new list and set to App state */
-      const reminders = this.props.reminders.concat(reminderObject)
-      this.props.setReminder(reminders)
 
-      /* write to json file */
+      /* write to database */
       axios
-        .post('/api/reminders', reminderObject) /* https://thawing-bayou-48463.herokuapp.com */
+        .post('https://thawing-bayou-48463.herokuapp.com/api/reminders', reminderObject) /* https://thawing-bayou-48463.herokuapp.com voi jättää pois, tarvitaan paikallisen testaamiseen*/
         .then(response => {
-          console.log('post promise fulfilled for id: ', maxid)
+          /* concatenate new list and set to App state */
+          reminderObject.id = response.data /* post returns only new database id */
+          const reminders = this.props.reminders.concat(reminderObject)
+          this.props.setReminder(reminders)
+          /* clear input field */
+          this.setState({newReminder : ''})
+          console.log('post promise fulfilled for: ', reminderObject.name, 'id: ', response.data)
+          //console.log('obj: ', reminderObject)
+      })
+        .catch(error => {
+          console.log(error.message)
+          window.alert('Ei voitu lisätä!')
         })
-
-        /* clear input field */
-      this.state.newReminder = ''
 
     } else {
       alert('A duplicate reminder exists already!')
@@ -50,6 +51,7 @@ class AddReminders extends React.Component {
   }
 
   handleReminderChange = (event) => {
+    //console.log('new value: ', {newReminder: event.target.value})
     this.setState({ newReminder: event.target.value })
   }
 
